@@ -58,10 +58,7 @@ class App extends Component {
           
           <Route path="/:query" component={ Header } />
           <Route path="/:query" component={ ({ match }) => {
-            // This is where I am having trouble
-            this.performSearch(match.params.query);
-
-            return ( <Gallery match={ match } photos={ this.state.photos } /> );
+            return ( <Gallery match={ match } performSearch={ this.performSearch } photos={ this.state.photos } /> );
           }} />
 
           {/* Todo: Not Found Route Here */}
