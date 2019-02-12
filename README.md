@@ -1,3 +1,16 @@
+## About
+
+This project is a website that uses React to get the latest images for a certain topic from Flickr.
+
+## How to add your API Key
+
+Add a config.js file to the src folder with your code like this: 
+```javascript
+const apiKey = "YOUR_API_KEY";
+export default apiKey;
+```
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
