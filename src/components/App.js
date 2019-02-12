@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 // Stores api key
 import apiKey from "../config";
@@ -7,9 +7,11 @@ import apiKey from "../config";
 // App imports
 import Header from "./Header";
 import Gallery from "./Gallery";
+import NotFound404 from "./NotFound404";
 
 class App extends Component {
   state = {
+    loading: true,
     photos: []
   };
 
@@ -49,25 +51,49 @@ class App extends Component {
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&content_type=1&format=json&nojsoncallback=1`)
       .then(res => res.json())
       .then(res => {
-        const photos = { photos: this.photoUrls(res.photos.photo) };
-        this.setState(photos);
+        this.setState({
+          loading: false,
+          photos: this.photoUrls(res.photos.photo)
+        })
       })
       .catch(err => console.log("There was an error requesting the data.", err));
   }
 
   render() {
+    const navigationItems = ["cats", "snow", "science", "technology", "programming", "earth", "beach", "hawaii"];
+
     return (
       <BrowserRouter>
         <div className="container">
-          {/* Redirect to /cats when you first visit the site */}
-          <Route exact path="/" component={ () => <Redirect to="/cats" /> } />
-          
-          <Route path="/:query" component={({ history }) => <Header navItems={["cats", "snow", "science", "technology", "programming", "earth", "beach", "hawaii"]} history={ history } /> } />
-          <Route path="/:query" component={({ match }) => {
-            return ( <Gallery match={ match } performSearch={ this.performSearch } photos={ this.state.photos } /> );
-          }} />
+          <Switch>
+            {/* Redirect to /cats when you first visit the site */}
+            <Route exact path="/" component={ () => <Redirect to="/cats" /> } />
+            
+            {/* Header & Gallery */}
+            <Route exact path="/:query" component={({ history, match }) => 
+              <React.Fragment>
+                <Header navItems={navigationItems} history={ history } />
 
-          {/* Todo: Not Found Route Here */}
+                {
+                  (this.state.loading)
+                  ? <h2>Loading...</h2>
+                  : <Gallery 
+                      match={ match } 
+                      performSearch={ this.performSearch } 
+                      photos={ this.state.photos } 
+                    />
+                }
+              </React.Fragment>
+            } />
+
+            {/* Not Found Route */}
+            <Route component={({ history }) => 
+              <React.Fragment>
+                <Header navItems={navigationItems} history={ history } />
+                <NotFound404 />
+              </React.Fragment>
+            } />
+          </Switch>
         </div>
       </BrowserRouter>
     );

@@ -5,9 +5,10 @@ import NotFound from "./NotFound";
 
 class Gallery extends Component {
   componentDidUpdate() {
-    const { performSearch, match } = this.props;
+    const { loading, performSearch, match } = this.props;
     
     performSearch(match.params.query);
+    console.log(loading)
   }
 
   render() {

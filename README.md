@@ -2,6 +2,23 @@
 
 This project is a website that uses React to get the latest images for a certain topic from Flickr.
 
+## Usage
+
+Clone the repo to your computer
+```
+git clone https://github.com/mosesfinlay/react-gallery-app.git
+```
+
+Change into the react-gallery-app directory
+```
+cd react-gallery-app
+```
+
+Run it locally
+```
+npm start
+```
+
 ## How to add your API Key
 
 Add a config.js file to the src folder with your code like this: 
@@ -9,7 +26,6 @@ Add a config.js file to the src folder with your code like this:
 const apiKey = "YOUR_API_KEY";
 export default apiKey;
 ```
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
