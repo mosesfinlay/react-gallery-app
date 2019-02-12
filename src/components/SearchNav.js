@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const SearchNav = () => {
+const SearchNav = ({ navItems }) => {
   return (
     <nav className="main-nav">
       <ul>
-        <li><Link to="/cats">Cats</Link></li>
-        <li><Link to="/dogs">Dogs</Link></li>
-        <li><Link to="/computers">Computers</Link></li>
+        { navItems.map(navItem => 
+          <li>
+            <Link to={`/${navItem}`}>{navItem}</Link>
+          </li> 
+        )}
       </ul>
     </nav>
   );

@@ -56,7 +56,7 @@ class App extends Component {
           {/* Redirect to /cats when you first visit the site */}
           <Route exact path="/" component={ () => <Redirect to="/cats" /> } />
           
-          <Route path="/:query" component={ Header } />
+          <Route path="/:query" component={({ history }) => <Header navItems={["cats", "snow", "science", "technology", "programming", "earth", "beach", "hawaii", "lava"]} history={ history } /> } />
           <Route path="/:query" component={ ({ match }) => {
             return ( <Gallery match={ match } performSearch={ this.performSearch } photos={ this.state.photos } /> );
           }} />

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Photo from "./Photo";
+import NotFound from "./NotFound";
 
 class Gallery extends Component {
   componentDidUpdate() {
@@ -11,12 +12,22 @@ class Gallery extends Component {
 
   render() {
     const { photos, match } = this.props;
-    const results = photos.map(photo => <Photo key={ photo.id } url={ photo.url } />);
+    let results = photos.map(photo => <Photo key={ photo.id } url={ photo.url } />);
+    
+    const success = ( 
+      <h2 className="results">
+        Results for 
+        <strong>{ `"${match.params.query}"` }</strong>
+      </h2>
+    );
+    const failed = ( 
+      <NotFound query={ match.params.query } />
+    );
 
     return (
       <div className="photo-container">
-        <h2>Results for <strong>{ `"${match.params.query}"` }</strong></h2>
-        
+        { results.length > 0 ? success : failed }
+
         <ul>
           { results }
         </ul>
