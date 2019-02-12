@@ -16,8 +16,7 @@ class Gallery extends Component {
     
     const success = ( 
       <h2 className="results">
-        Results for 
-        <strong>{ `"${match.params.query}"` }</strong>
+        Results for <strong>{ `"${match.params.query}"` }</strong>
       </h2>
     );
     const failed = ( 

@@ -38,6 +38,12 @@ class App extends Component {
     return photoContent;
   }
 
+  componentDidMount() {
+    const pathName = window.location.pathname.replace("/", "");
+
+    this.performSearch(pathName);
+  }
+
   // Performs the search of photos 
   performSearch = query => {
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&content_type=1&format=json&nojsoncallback=1`)
@@ -56,8 +62,8 @@ class App extends Component {
           {/* Redirect to /cats when you first visit the site */}
           <Route exact path="/" component={ () => <Redirect to="/cats" /> } />
           
-          <Route path="/:query" component={({ history }) => <Header navItems={["cats", "snow", "science", "technology", "programming", "earth", "beach", "hawaii", "lava"]} history={ history } /> } />
-          <Route path="/:query" component={ ({ match }) => {
+          <Route path="/:query" component={({ history }) => <Header navItems={["cats", "snow", "science", "technology", "programming", "earth", "beach", "hawaii"]} history={ history } /> } />
+          <Route path="/:query" component={({ match }) => {
             return ( <Gallery match={ match } performSearch={ this.performSearch } photos={ this.state.photos } /> );
           }} />
 

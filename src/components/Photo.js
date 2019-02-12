@@ -3,7 +3,9 @@ import React from "react";
 const Photo = ({ title, url }) => {
   return (
     <li>
-      <img src={ url } alt="" />
+      <a href={ url } >
+        <img src={ url } alt="" />
+      </a>
     </li>
   );
 };

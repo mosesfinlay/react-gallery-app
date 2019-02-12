@@ -6,7 +6,7 @@ const SearchNav = ({ navItems }) => {
     <nav className="main-nav">
       <ul>
         { navItems.map(navItem => 
-          <li>
+          <li key={navItems.indexOf(navItem)}>
             <Link to={`/${navItem}`}>{navItem}</Link>
           </li> 
         )}
