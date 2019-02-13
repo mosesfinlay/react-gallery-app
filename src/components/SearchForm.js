@@ -3,8 +3,8 @@ import React, { Component } from "react";
 class SearchForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    const path = `/${this.search.value}`;
-
+    const path = `/${this.search.value.replace("/", "")}`;
+    
     this.props.history.push(path);
     this.search.value = "";
   }
